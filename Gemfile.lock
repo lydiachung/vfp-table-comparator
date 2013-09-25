@@ -1,0 +1,12 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    dbf (2.0.6)
+      fastercsv (~> 1.5.4)
+    fastercsv (1.5.5)
+
+PLATFORMS
+  x86-mingw32
+
+DEPENDENCIES
+  dbf
