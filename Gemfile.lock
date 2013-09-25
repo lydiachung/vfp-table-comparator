@@ -1,12 +1,17 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    bouncy-castle-java (1.5.0147)
     dbf (2.0.6)
       fastercsv (~> 1.5.4)
     fastercsv (1.5.5)
+    jruby-openssl (0.9.0)
+      bouncy-castle-java (>= 1.5.0147)
 
 PLATFORMS
+  java
   x86-mingw32
 
 DEPENDENCIES
   dbf
+  jruby-openssl
