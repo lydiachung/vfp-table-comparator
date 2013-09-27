@@ -5,8 +5,6 @@ class VFPTableComparator
 
   def compare(s_tbl_one, s_tbl_two, a_key_cols, a_excl_cols)
     
-    
-    
     File.open("#{File.basename(s_tbl_two, ".dbf")}.log", 'w') do |o_file|
       
       h_tbl_one_recs = rec_to_hash(s_tbl_one, a_key_cols)
@@ -14,6 +12,7 @@ class VFPTableComparator
       a_tbl_one_keys = h_tbl_one_recs.keys
       a_tbl_two_keys = h_tbl_two_recs.keys
       a_all_keys = a_tbl_one_keys | a_tbl_two_keys
+      
       a_all_keys.each do |x_key|
         case
         when !h_tbl_one_recs.include?(x_key)
@@ -43,7 +42,7 @@ class VFPTableComparator
       next if o_rec.nil? 
       s_key = ""
       a_key_cols.each do |s_key_col|
-        s_key << o_rec[s_key_col] << "|"
+        s_key << o_rec[s_key_col].to_s << "|"
       end
       h_recs[s_key] = o_rec.attributes 
     end
@@ -52,19 +51,29 @@ class VFPTableComparator
    
 end
 
-s_tbl_one = File.join("d:","ltuf","P8","system","alertmsg.dbf")
-s_tbl_two = File.join("d:","g8p","P8","system","alertmsg.dbf")
+#s_tbl_one = File.join("d:","g8p","P8","system","parcels.dbf")
+#s_tbl_two = File.join("d:","g8","P8","system","parcels.dbf")
+#a_key_cols = ["PARCEL"]
+#a_excl_cols = []
+
+s_tbl_one = File.join("d:","g8p","P8","system","alertmsg.dbf")
+s_tbl_two = File.join("d:","g8","P8","system","alertmsg.dbf")
 a_key_cols = ["ALERTID"]
 a_excl_cols = []
+#
+#s_tbl_one = File.join("d:","g8p","P8","system","stdcols.dbf")
+#s_tbl_two = File.join("d:","g8","P8","system","stdcols.dbf")
+#a_key_cols = ["COLUMN"]
+#a_excl_cols = []
+#
+#s_tbl_one = File.join("d:","g8p","P8","system","columns.dbf")
+#s_tbl_two = File.join("d:","g8","P8","system","columns.dbf")
+#a_key_cols = ["TABLEID", "COLUMN"]
+#a_excl_cols = ["UPTIME","POS","ADDTIME"]
 
-s_tbl_one = File.join("d:","ltuf","P8","system","stdcols.dbf")
-s_tbl_two = File.join("d:","g8p","P8","system","stdcols.dbf")
-a_key_cols = ["COLUMN"]
-a_excl_cols = []
-
-s_tbl_one = File.join("d:","ltuf","P8","system","columns.dbf")
-s_tbl_two = File.join("d:","g8p","P8","system","columns.dbf")
-a_key_cols = ["TABLEID", "COLUMN"]
-a_excl_cols = ["UPTIME","POS"]
+#s_tbl_one = File.join("d:","g8p","P8","system","tables.dbf")
+#s_tbl_two = File.join("d:","g8","P8","system","tables.dbf")
+#a_key_cols = ["TABLEID"]
+#a_excl_cols = ["UPTIME","ADDTIME"]
 
 VFPTableComparator.new.compare(s_tbl_one, s_tbl_two, a_key_cols, a_excl_cols)
